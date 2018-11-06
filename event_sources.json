@@ -1,0 +1,9 @@
+{
+  "EventSourceMappings": [
+    {
+      "EventSourceArn": "arn:aws:events:eu-central-1:00364xxxxxxxx:rule/bucket_size",
+      "schedule expression": cron(3 11 * * ? *)
+      "Enabled": true
+    }
+  ]
+ }
