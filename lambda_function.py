@@ -15,8 +15,8 @@ def Notification(mail_id,threshold,bucket_name,size_in_gbs):
     message = 'Total Object size in '+ str(bucket_name) +' has exceeded the limit of 60GB and currently is '+str(size_in_gbs)+'GB. Do not respond to this automated email and Please contact the Administrator for more details. \n\n \n Regards,\n Caspian Support'
  
     # setup the parameters of the message
-    password = "sonata$561"
-    msg['From'] = "kuldeep.singh@sonata-software.com"
+    password = "<email id passowrd>"
+    msg['From'] = "<email ID>"
     msg['To'] = mail_id
     msg['Subject'] = "Objectsize Notification Alert"
  
@@ -60,14 +60,6 @@ def bucketSize(bucket_name,threshold,mail_id,trial_number):
     else:
         print("threshold for "+str(bucket_name)+" is not crossed")
 
-
-
-
-
-
-
-
-
 def lambda_handler(event, context):
     response = table.scan()
     dict={}
@@ -79,12 +71,8 @@ def lambda_handler(event, context):
     print(dict)
     for k, v in dict.items():
         bucket=k
-        print(bucket)
         mail_id=v['email_id']
-        print(mail_id)
-        trial_number=v['trial_number']
-        print(trial_number)
+        trial_number=v['trial_number'
         threshold=v['size_threshold_in_GB']
-        print(threshold)
         bucketSize(bucket,threshold,mail_id,trial_number)
         
