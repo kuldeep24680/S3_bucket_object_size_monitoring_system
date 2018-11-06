@@ -44,8 +44,8 @@ def bucketSize(bucket_name,threshold,mail_id,trial_number):
     bucket = s3.Bucket(bucket_name)
     size = sum(k.size for k in bucket.objects.all())
     size_in_gbs=size/1024/1024/1024
-    print(size_in_gbs)
-    if size_in_gbs>int(threshold) and  int(trial_number)!=1:
+    counter=int(trial_number)+1
+    if size_in_gbs>int(threshold) and  counter!=4:
         Notification(mail_id,threshold,bucket_name,size_in_gbs)
         table.update_item(
         Key={
@@ -53,7 +53,7 @@ def bucketSize(bucket_name,threshold,mail_id,trial_number):
         },
         UpdateExpression='SET trial_number = :val1',
         ExpressionAttributeValues={
-            ':val1': '1'
+            ':val1': str(counter)
         }
         )
         print("email is successfully sent")
